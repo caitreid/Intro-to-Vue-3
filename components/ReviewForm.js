@@ -9,6 +9,9 @@ app.component('review-form', {
     <label for="review">Review:</label>
     <textarea id="review" v-model="review"></textarea>
 
+    <label for="recommend">Would you recommend this product?</label>
+    <textarea id="recommend" v-model="recommend"></textarea>
+
     <label for="rating">Rating:</label>
     <select id="rating" v-model.number="rating">
         <option>5</option>
@@ -22,12 +25,13 @@ app.component('review-form', {
         return {
             name: '',
             review: '',
-            rating: null
+            rating: null,
+            recommend: ''
         }
     },
     methods: {
         onSubmit() {
-            if (this.name === '' || this.review === '' || this.rating === null) {
+            if (this.name === '' || this.review === '' || this.rating === null || this.recommend === '') {
                 alert('incomplete!')
                 return
             }
@@ -35,13 +39,15 @@ app.component('review-form', {
             let productReview = {
                 name: this.name,
                 review: this.review,
-                rating: this.rating
+                rating: this.rating,
+                recommend: this.recommend
             }
             this.$emit('review-submitted', productReview)
 
             this.name = ''
             this.review = ''
             this.rating = null
+            this.recommend = ''
 
             console.log(productReview)
         }
