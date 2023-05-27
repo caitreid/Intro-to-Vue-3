@@ -27,6 +27,11 @@ app.component('review-form', {
     },
     methods: {
         onSubmit() {
+            if (this.name === '' || this.review === '' || this.rating === null) {
+                alert('incomplete!')
+                return
+            }
+
             let productReview = {
                 name: this.name,
                 review: this.review,
